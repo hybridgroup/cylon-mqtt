@@ -5,7 +5,7 @@ var module = source("cylon-mqtt");
 var Adaptor = source('adaptor'),
     Driver = source('driver');
 
-describe("Cylon.Mqtt", function() {
+describe("Cylon.MQTT", function() {
   describe("#register", function() {
     it("should be a function", function() {
       expect(module.register).to.be.a('function');
