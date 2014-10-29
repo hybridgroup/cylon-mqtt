@@ -1,4 +1,4 @@
-# Cylon.js For Mqtt
+# Cylon.js For MQTT
 
 Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and physical computing using Node.js
 
