@@ -35,7 +35,9 @@ Cylon.robot({
 }).start();
 ```
 
-Explain how to connect from the computer to the device here...
+You need an MQTT broker running, in order to connect, publish, and subscribe to MQTT messages using cylon-mqtt. 
+
+A good one is https://github.com/mcollina/mosca
 
 ## Contributing
 
