@@ -2,9 +2,9 @@
 
 Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and physical computing using Node.js
 
-This repository contains the Cylon adaptor for the MQTT messaging protocol.
+This repository contains the Cylon.js adaptor/driver for the MQTT messaging protocol. It uses the MQTT.js node module (https://github.com/adamvr/MQTT.js) created by [@adamvr](https://github.com/adamvr) and [@mcollina](https://github.com/mcollina) thank you!
 
-For more information about Cylon, check out the repo at
+For more information about Cylon.js, check out the repo at
 https://github.com/hybridgroup/cylon
 
 ## Getting Started
@@ -19,11 +19,18 @@ Install the module with: `npm install cylon-mqtt`
 var Cylon = require('cylon');
 
 Cylon.robot({
-  connection: { name: 'mqtt', adaptor: 'mqtt' },
-  device: {name: 'mqtt', driver: 'mqtt'},
+  connection: { name: 'server', adaptor: 'mqtt', host: 'mqtt://localhost:1883'},
+  device: {name: 'hello', driver: 'mqtt', topic: 'greetings'},
 
   work: function(my) {
-    // provide an example of your module here
+    my.hello.on('message', function (data) {
+      console.log(data);
+    });
+
+    every((1).seconds(), function() {
+      console.log("Saying hello...");
+      my.server.publish('greetings', 'hi there');
+    });
   }
 }).start();
 ```
