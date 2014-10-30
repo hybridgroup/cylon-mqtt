@@ -1,16 +1,22 @@
 {
   "name": "cylon-mqtt",
   "version": "0.1.0",
-  "main": "lib/cylon-mqtt.js",
   "description": "Cylon module for MQTT",
+
+  "main": "lib/cylon-mqtt.js",
+
   "homepage": "http://cylonjs.com",
   "bugs": "https://github.com/hybridgroup/cylon-mqtt/issues",
+
   "author": "The Hybrid Group <cylonjs@hybridgroup.com>",
+
   "repository": {
     "type": "git",
     "url": "https://github.com/hybridgroup/cylon-mqtt"
   },
+
   "license": "Apache 2.0",
+
   "devDependencies": {
     "sinon-chai": "2.5.0",
     "chai": "1.9.1",
@@ -18,11 +24,13 @@
     "sinon": "1.9.1",
     "jshint": "2.5.0"
   },
+
   "peerDependencies": {
     "cylon": ">=0.19.0 < 1"
   },
+
   "dependencies": {
     "cylon": "~0.19.0",
-    "mqtt": "^0.3.12"
+    "mqtt": "~0.3.12"
   }
 }
