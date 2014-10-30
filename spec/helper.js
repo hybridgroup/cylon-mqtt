@@ -23,5 +23,8 @@ global.stub = sinon.stub;
 
 // convenience function to require modules in lib directory
 global.source = function(module) {
-  return require(path.normalize('./../../lib/' + module));
+  return require(path.normalize('./../lib/' + module));
 };
+
+var Cylon = require('cylon');
+Cylon.Logger.setup(false);
