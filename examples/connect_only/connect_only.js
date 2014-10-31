@@ -1,11 +1,11 @@
 var Cylon = require('cylon');
 
 Cylon.robot({
-  connection: { name: 'server', adaptor: 'mqtt', host: 'mqtt://localhost:1883'},
+  connection: { name: 'server', adaptor: 'mqtt', host: 'mqtt://localhost:1883' },
 
   work: function(my) {
     my.server.subscribe('greetings');
-    
+
     my.server.on('message', function (topic, data) {
       console.log(data);
     });
