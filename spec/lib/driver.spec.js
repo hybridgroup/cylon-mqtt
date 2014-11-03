@@ -52,10 +52,12 @@ describe("Cylon.Drivers.Mqtt", function() {
     describe("when the client receives a message", function() {
       context("if the topic matches the driver's", function() {
         beforeEach(function() {
+          driver.emit = spy();
           adaptor.on.yield('topic', 'message');
         });
 
         it("emits the event", function() {
+          expect(driver.emit).to.be.calledWith('message', 'message');
           expect(device.emit).to.be.calledWith('message', 'message');
         });
       });
