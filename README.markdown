@@ -2,25 +2,76 @@
 
 Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and physical computing using Node.js
 
-This repository contains the Cylon.js adaptor/driver for the MQTT messaging protocol. It uses the MQTT.js node module (https://github.com/adamvr/MQTT.js) created by [@adamvr](https://github.com/adamvr) and [@mcollina](https://github.com/mcollina) thank you!
+This repository contains the Cylon.js adaptor/driver for the MQTT messaging protocol.
+It uses the MQTT.js node module (https://github.com/adamvr/MQTT.js) created by [@adamvr](https://github.com/adamvr) and [@mcollina](https://github.com/mcollina), thank you!
 
-For more information about Cylon.js, check out the repo at
-https://github.com/hybridgroup/cylon
+For more information about Cylon.js, check out the repo at https://github.com/hybridgroup/cylon
 
 ## Getting Started
 
-Install the module with: `npm install cylon-mqtt`
+Install `cylon-mqtt` through NPM:
+
+    $ npm install cylon-mqtt
+
+Before using `cylon-mqtt`, you'll need to have a MQTT broker running in order to connect/publish/subscribe to messages.
+
+A good, simple broker is [mosca](https://github.com/mcollina/mosca).
+The developers have a [tutorial on using Mosca as a standalone service](https://github.com/mcollina/mosca/wiki/Mosca-as-a-standalone-service.).
+
+## Usage
+
+There's two different ways to use the `cylon-mqtt` module.
+
+You can use the connection object only, in which case you have pub/sub access to all available MQTT channels:
+
+```javascript
+Cylon.robot({
+  connection: { name: 'server', adaptor: 'mqtt', host: 'mqtt://localhost:1883' },
+
+  work: function(my) {
+    my.server.subscribe('hello');
+
+    my.server.on('message', function (topic, data) {
+      console.log(topic + ": " + data);
+    });
+
+    every((1).seconds(), function() {
+      my.server.publish('hello', 'hi there');
+    });
+  }
+});
+```
+
+Or, you can use the device object, which restricts your interaction to a single MQTT channel.
+This can make it easier to keep track of different channels.
+
+```javascript
+Cylon.robot({
+  connection: { name: 'server', adaptor: 'mqtt', host: 'mqtt://localhost:1883' },
+  device: { name: 'hello', driver: 'mqtt', topic: 'hello' },
+
+  work: function(my) {
+    my.hello.on('message', function (data) {
+      console.log("hello: " + data);
+    });
+
+    every((1).seconds(), function() {
+      my.hello.publish('hi there');
+    });
+  }
+})
+```
 
 ## Examples
 
-## Connecting
+#### Simple
 
 ```javascript
 var Cylon = require('cylon');
 
 Cylon.robot({
-  connection: { name: 'server', adaptor: 'mqtt', host: 'mqtt://localhost:1883'},
-  device: {name: 'hello', driver: 'mqtt', topic: 'greetings'},
+  connection: { name: 'server', adaptor: 'mqtt', host: 'mqtt://localhost:1883' },
+  device: { name: 'hello', driver: 'mqtt', topic: 'greetings' },
 
   work: function(my) {
     my.hello.on('message', function (data) {
@@ -29,15 +80,66 @@ Cylon.robot({
 
     every((1).seconds(), function() {
       console.log("Saying hello...");
-      my.server.publish('greetings', 'hi there');
+      my.hello.publish('hi there');
     });
   }
 }).start();
 ```
 
-You need an MQTT broker running, in order to connect, publish, and subscribe to MQTT messages using cylon-mqtt. 
+#### Connection Only
 
-A good one is https://github.com/mcollina/mosca
+```javascript
+var Cylon = require('cylon');
+
+Cylon.robot({
+  connection: { name: 'server', adaptor: 'mqtt', host: 'mqtt://localhost:1883' },
+
+  work: function(my) {
+    my.server.subscribe('hello');
+
+    my.server.on('message', function (topic, data) {
+      console.log(topic + ": " + data);
+    });
+
+    every((1).seconds(), function() {
+      console.log("Saying hello...");
+      my.server.publish('hello', 'hi there');
+    });
+  }
+}).start();
+```
+
+#### Arduino Blink
+
+```javascript
+var Cylon = require('cylon');
+
+Cylon.robot({
+  connections: [
+    { name: 'mqtt', adaptor: 'mqtt', host: 'mqtt://localhost:1883' },
+    { name: 'firmata', adaptor: 'firmata', port: '/dev/ttyACM0' }
+  ],
+
+  devices: [
+    { name: 'toggle', driver: 'mqtt', topic: 'toggle', adaptor: 'mqtt' },
+    { name: 'led', driver: 'led', pin: '13', adaptor: 'firmata' },
+  ]
+
+  work: function(my) {
+    my.toggle.on('message', function(data) {
+      console.log("Message on 'toggle': " + data);
+      my.led.toggle();
+    });
+
+    every((1).second(), function() {
+      console.log("Toggling LED.");
+      my.toggle.publish('toggle');
+    });
+  }
+}).start();
+```
+
+For more examples, please see the `examples` folder.
 
 ## Contributing
 

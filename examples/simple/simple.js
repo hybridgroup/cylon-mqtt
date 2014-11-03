@@ -11,7 +11,7 @@ Cylon.robot({
 
     every((1).seconds(), function() {
       console.log("Saying hello...");
-      my.server.publish('greetings', 'hi there');
+      my.hello.publish('hi there');
     });
   }
 }).start();
