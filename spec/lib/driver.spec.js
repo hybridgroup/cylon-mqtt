@@ -10,7 +10,7 @@ describe("Cylon.Drivers.Mqtt", function() {
   beforeEach(function() {
     driver = new Driver({
       device: { connection: {} },
-      extraParams: { topic: 'topic' }
+      topic: 'topic'
     });
   });
 

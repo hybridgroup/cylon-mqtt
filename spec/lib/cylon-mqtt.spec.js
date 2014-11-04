@@ -6,9 +6,15 @@ var Adaptor = source('adaptor'),
     Driver = source('driver');
 
 describe("Cylon.MQTT", function() {
-  describe("#register", function() {
-    it("should be a function", function() {
-      expect(module.register).to.be.a('function');
+  describe("#adaptors", function() {
+    it('is an array of supplied adaptors', function() {
+      expect(module.adaptors).to.be.eql(['mqtt']);
+    });
+  });
+
+  describe("#drivers", function() {
+    it('is an array of supplied drivers', function() {
+      expect(module.drivers).to.be.eql(['mqtt']);
     });
   });
 

@@ -9,7 +9,7 @@ describe("Cylon.Adaptors.Mqtt", function() {
 
   beforeEach(function() {
     adaptor = new Adaptor({
-      extraParams: { host: 'host' }
+      host: 'host'
     });
   });
 
