@@ -157,7 +157,7 @@ For more examples, please see the `examples` folder.
 
 ## Release History
 
-None yet...
+0.1.0 - Initial release
 
 ## License
 
