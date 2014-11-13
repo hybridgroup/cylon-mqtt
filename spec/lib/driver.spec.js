@@ -9,7 +9,7 @@ describe("Cylon.Drivers.Mqtt", function() {
 
   beforeEach(function() {
     driver = new Driver({
-      device: { connection: {} },
+      adaptor: {},
       topic: 'topic'
     });
   });
@@ -26,17 +26,18 @@ describe("Cylon.Drivers.Mqtt", function() {
   });
 
   describe("#start", function() {
-    var callback, adaptor, device;
+    var callback, adaptor;
 
     beforeEach(function() {
       callback = spy();
 
-      driver.device = device = { emit: spy() };
       driver.adaptor = adaptor = {
         subscribe: spy(),
         publish: spy(),
         on: stub()
       };
+
+      driver.emit = spy();
 
       driver.start(callback);
     });
@@ -52,13 +53,11 @@ describe("Cylon.Drivers.Mqtt", function() {
     describe("when the client receives a message", function() {
       context("if the topic matches the driver's", function() {
         beforeEach(function() {
-          driver.emit = spy();
           adaptor.on.yield('topic', 'message');
         });
 
         it("emits the event", function() {
           expect(driver.emit).to.be.calledWith('message', 'message');
-          expect(device.emit).to.be.calledWith('message', 'message');
         });
       });
 
@@ -68,7 +67,7 @@ describe("Cylon.Drivers.Mqtt", function() {
         });
 
         it("does not emit the event", function() {
-          expect(device.emit).to.not.be.called;
+          expect(driver.emit).to.not.be.called;
         });
       });
     });

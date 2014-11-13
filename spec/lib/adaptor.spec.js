@@ -20,16 +20,14 @@ describe("Cylon.Adaptors.Mqtt", function() {
   });
 
   describe("#connect", function() {
-    var client, conn, callback;
+    var client, callback;
 
     beforeEach(function() {
-      conn = { emit: spy() };
       client = { on: stub() };
       callback = spy();
 
       stub(mqtt, 'connect').returns(client);
 
-      adaptor.connection = conn
       adaptor.connect(callback);
     });
 
@@ -51,11 +49,12 @@ describe("Cylon.Adaptors.Mqtt", function() {
 
     describe("when the 'message' event is triggered", function() {
       beforeEach(function() {
+        adaptor.emit = spy();
         client.on.yield('topic', 'message');
       });
 
       it("emits the 'message' event on the connection", function() {
-        expect(conn.emit).to.be.calledWith('message', 'topic', 'message');
+        expect(adaptor.emit).to.be.calledWith('message', 'topic', 'message');
       });
     });
 
