@@ -9,7 +9,7 @@ describe("Cylon.Drivers.Mqtt", function() {
 
   beforeEach(function() {
     driver = new Driver({
-      adaptor: {},
+      connection: {},
       topic: 'topic'
     });
   });
@@ -26,12 +26,12 @@ describe("Cylon.Drivers.Mqtt", function() {
   });
 
   describe("#start", function() {
-    var callback, adaptor;
+    var callback, connection;
 
     beforeEach(function() {
       callback = spy();
 
-      driver.adaptor = adaptor = {
+      driver.connection = connection = {
         subscribe: spy(),
         publish: spy(),
         on: stub()
@@ -47,13 +47,13 @@ describe("Cylon.Drivers.Mqtt", function() {
     });
 
     it("subscribes to @topic", function() {
-      expect(adaptor.subscribe).to.be.calledWith('topic');
+      expect(connection.subscribe).to.be.calledWith('topic');
     });
 
     describe("when the client receives a message", function() {
       context("if the topic matches the driver's", function() {
         beforeEach(function() {
-          adaptor.on.yield('topic', 'message');
+          connection.on.yield('topic', 'message');
         });
 
         it("emits the event", function() {
@@ -63,7 +63,7 @@ describe("Cylon.Drivers.Mqtt", function() {
 
       context("if the topic doesn't match the drivers", function() {
         beforeEach(function() {
-          adaptor.on.yield('not-topic', 'message');
+          connection.on.yield('not-topic', 'message');
         });
 
         it("does not emit the event", function() {
@@ -87,15 +87,15 @@ describe("Cylon.Drivers.Mqtt", function() {
   });
 
   describe("#publish", function() {
-    var adaptor;
+    var connection;
 
     beforeEach(function() {
-      driver.adaptor = adaptor = { publish: spy() };
+      driver.connection = connection = { publish: spy() };
       driver.publish('message');
     });
 
-    it("publishes an event on the topic through the adaptor", function() {
-      expect(adaptor.publish).to.be.calledWith('topic', 'message');
+    it("publishes an event on the topic through the connection", function() {
+      expect(connection.publish).to.be.calledWith('topic', 'message');
     });
   });
 });
