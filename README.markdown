@@ -26,7 +26,9 @@ You can use the connection object only, in which case you have pub/sub access to
 
 ```javascript
 Cylon.robot({
-  connection: { name: 'server', adaptor: 'mqtt', host: 'mqtt://localhost:1883' },
+  connections: {
+    server: { adaptor: 'mqtt', host: 'mqtt://localhost:1883' }
+  },
 
   work: function(my) {
     my.server.subscribe('hello');
@@ -47,8 +49,13 @@ This can make it easier to keep track of different channels.
 
 ```javascript
 Cylon.robot({
-  connection: { name: 'server', adaptor: 'mqtt', host: 'mqtt://localhost:1883' },
-  device: { name: 'hello', driver: 'mqtt', topic: 'hello' },
+  connections: {
+    server: { adaptor: 'mqtt', host: 'mqtt://localhost:1883' }
+  },
+
+  devices: {
+    hello: { driver: 'mqtt', topic: 'hello' }
+  },
 
   work: function(my) {
     my.hello.on('message', function (data) {
@@ -70,8 +77,13 @@ Cylon.robot({
 var Cylon = require('cylon');
 
 Cylon.robot({
-  connection: { name: 'server', adaptor: 'mqtt', host: 'mqtt://localhost:1883' },
-  device: { name: 'hello', driver: 'mqtt', topic: 'greetings' },
+  connections: {
+    server: { adaptor: 'mqtt', host: 'mqtt://localhost:1883' }
+  },
+
+  devices: {
+    hello: { driver: 'mqtt', topic: 'greetings' }
+  },
 
   work: function(my) {
     my.hello.on('message', function (data) {
@@ -92,7 +104,9 @@ Cylon.robot({
 var Cylon = require('cylon');
 
 Cylon.robot({
-  connection: { name: 'server', adaptor: 'mqtt', host: 'mqtt://localhost:1883' },
+  connections: {
+    server: { adaptor: 'mqtt', host: 'mqtt://localhost:1883' }
+  },
 
   work: function(my) {
     my.server.subscribe('hello');
@@ -115,15 +129,15 @@ Cylon.robot({
 var Cylon = require('cylon');
 
 Cylon.robot({
-  connections: [
-    { name: 'mqtt', adaptor: 'mqtt', host: 'mqtt://localhost:1883' },
-    { name: 'firmata', adaptor: 'firmata', port: '/dev/ttyACM0' }
-  ],
+  connections: {
+    mqtt: { adaptor: 'mqtt', host: 'mqtt://localhost:1883' },
+    firmata: { adaptor: 'firmata', port: '/dev/ttyACM0' }
+  },
 
-  devices: [
-    { name: 'toggle', driver: 'mqtt', topic: 'toggle', adaptor: 'mqtt' },
-    { name: 'led', driver: 'led', pin: '13', adaptor: 'firmata' },
-  ]
+  devices: {
+    toggle: { driver: 'mqtt', topic: 'toggle', adaptor: 'mqtt' },
+    led: { driver: 'led', pin: '13', adaptor: 'firmata' },
+  },
 
   work: function(my) {
     my.toggle.on('message', function(data) {
