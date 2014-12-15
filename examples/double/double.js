@@ -1,7 +1,9 @@
 var Cylon = require('cylon');
 
 Cylon.robot({
-  connection: { name: 'server', adaptor: 'mqtt', host: 'mqtt://localhost:1883' },
+  connections: {
+    server: { adaptor: 'mqtt', host: 'mqtt://localhost:1883' }
+  },
 
   devices: {
     uno: { driver: 'mqtt', topic: 'hi' },
