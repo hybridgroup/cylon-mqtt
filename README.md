@@ -7,7 +7,7 @@ It uses the MQTT.js node module (https://github.com/adamvr/MQTT.js) created by [
 
 For more information about Cylon.js, check out the repo at https://github.com/hybridgroup/cylon
 
-## Getting Started
+## How to Install
 
 Install `cylon-mqtt` through NPM:
 
@@ -18,7 +18,7 @@ Before using `cylon-mqtt`, you'll need to have a MQTT broker running in order to
 A good, simple broker is [mosca](https://github.com/mcollina/mosca).
 The developers have a [tutorial on using Mosca as a standalone service](https://github.com/mcollina/mosca/wiki/Mosca-as-a-standalone-service.).
 
-## Usage
+## How to Use
 
 There's two different ways to use the `cylon-mqtt` module.
 
@@ -69,8 +69,6 @@ Cylon.robot({
 })
 ```
 
-## Examples
-
 #### Simple
 
 ```javascript
@@ -93,31 +91,6 @@ Cylon.robot({
     every((1).seconds(), function() {
       console.log("Saying hello...");
       my.hello.publish('hi there');
-    });
-  }
-}).start();
-```
-
-#### Connection Only
-
-```javascript
-var Cylon = require('cylon');
-
-Cylon.robot({
-  connections: {
-    server: { adaptor: 'mqtt', host: 'mqtt://localhost:1883' }
-  },
-
-  work: function(my) {
-    my.server.subscribe('hello');
-
-    my.server.on('message', function (topic, data) {
-      console.log(topic + ": " + data);
-    });
-
-    every((1).seconds(), function() {
-      console.log("Saying hello...");
-      my.server.publish('hello', 'hi there');
     });
   }
 }).start();
@@ -154,6 +127,37 @@ Cylon.robot({
 ```
 
 For more examples, please see the `examples` folder.
+
+## How to Connect
+
+```javascript
+var Cylon = require('cylon');
+
+Cylon.robot({
+  connections: {
+    server: { adaptor: 'mqtt', host: 'mqtt://localhost:1883' }
+  },
+
+  work: function(my) {
+    my.server.subscribe('hello');
+
+    my.server.on('message', function (topic, data) {
+      console.log(topic + ": " + data);
+    });
+
+    every((1).seconds(), function() {
+      console.log("Saying hello...");
+      my.server.publish('hello', 'hi there');
+    });
+  }
+}).start();
+```
+
+## Documentation
+
+We're busy adding documentation to [cylonjs.com](http://cylonjs.com). Please check there as we continue to work on Cylon.js.
+
+Thank you!
 
 ## Contributing
 
