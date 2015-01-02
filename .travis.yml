@@ -6,4 +6,4 @@ install:
   - npm install git://github.com/hybridgroup/cylon.git
   - npm install -g istanbul codeclimate-test-reporter
 script:
-  - make cover
+  - make ci
