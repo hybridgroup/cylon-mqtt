@@ -1,6 +1,7 @@
-'use strict';
+/* jshint expr:true */
+"use strict";
 
-var Cylon = require('cylon');
+var Cylon = require("cylon");
 
 var Driver = source("driver");
 
@@ -10,7 +11,7 @@ describe("Cylon.Drivers.Mqtt", function() {
   beforeEach(function() {
     driver = new Driver({
       connection: {},
-      topic: 'topic'
+      topic: "topic"
     });
   });
 
@@ -47,23 +48,23 @@ describe("Cylon.Drivers.Mqtt", function() {
     });
 
     it("subscribes to @topic", function() {
-      expect(connection.subscribe).to.be.calledWith('topic');
+      expect(connection.subscribe).to.be.calledWith("topic");
     });
 
     describe("when the client receives a message", function() {
       context("if the topic matches the driver's", function() {
         beforeEach(function() {
-          connection.on.yield('topic', 'message');
+          connection.on.yield("topic", "message");
         });
 
         it("emits the event", function() {
-          expect(driver.emit).to.be.calledWith('message', 'message');
+          expect(driver.emit).to.be.calledWith("message", "message");
         });
       });
 
       context("if the topic doesn't match the drivers", function() {
         beforeEach(function() {
-          connection.on.yield('not-topic', 'message');
+          connection.on.yield("not-topic", "message");
         });
 
         it("does not emit the event", function() {
@@ -91,11 +92,11 @@ describe("Cylon.Drivers.Mqtt", function() {
 
     beforeEach(function() {
       driver.connection = connection = { publish: spy() };
-      driver.publish('message');
+      driver.publish("message");
     });
 
     it("publishes an event on the topic through the connection", function() {
-      expect(connection.publish).to.be.calledWith('topic', 'message');
+      expect(connection.publish).to.be.calledWith("topic", "message");
     });
   });
 });

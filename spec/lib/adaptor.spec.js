@@ -1,21 +1,22 @@
-'use strict';
+/* jshint expr:true */
+"use strict";
 
 var Adaptor = source("adaptor");
 
-var mqtt = require('mqtt');
+var mqtt = require("mqtt");
 
 describe("Cylon.Adaptors.Mqtt", function() {
   var adaptor;
 
   beforeEach(function() {
     adaptor = new Adaptor({
-      host: 'host'
+      host: "host"
     });
   });
 
   describe("#constructor", function() {
     it("sets @host to the provided host", function() {
-      expect(adaptor.host).to.be.eql('host');
+      expect(adaptor.host).to.be.eql("host");
     });
   });
 
@@ -26,7 +27,7 @@ describe("Cylon.Adaptors.Mqtt", function() {
       client = { on: stub() };
       callback = spy();
 
-      stub(mqtt, 'connect').returns(client);
+      stub(mqtt, "connect").returns(client);
 
       adaptor.connect(callback);
     });
@@ -36,7 +37,7 @@ describe("Cylon.Adaptors.Mqtt", function() {
     });
 
     it("connects to MQTT with the provided host", function() {
-      expect(mqtt.connect).to.be.calledWith('host');
+      expect(mqtt.connect).to.be.calledWith("host");
     });
 
     it("sets @client to the mqtt connection", function() {
@@ -44,23 +45,23 @@ describe("Cylon.Adaptors.Mqtt", function() {
     });
 
     it("attaches a handler to the client", function() {
-      expect(client.on).to.be.calledWith('message');
+      expect(client.on).to.be.calledWith("message");
     });
 
     describe("when the 'message' event is triggered", function() {
       beforeEach(function() {
         adaptor.emit = spy();
-        client.on.yield('topic', 'message');
+        client.on.yield("topic", "message");
       });
 
       it("emits the 'message' event on the connection", function() {
-        expect(adaptor.emit).to.be.calledWith('message', 'topic', 'message');
+        expect(adaptor.emit).to.be.calledWith("message", "topic", "message");
       });
     });
 
     it("triggers the callback", function() {
       expect(callback).to.be.called;
-    })
+    });
   });
 
   describe("#disconnect", function() {
@@ -88,11 +89,11 @@ describe("Cylon.Adaptors.Mqtt", function() {
     beforeEach(function() {
       client = adaptor.client = { subscribe: spy() };
 
-      adaptor.subscribe('topic');
+      adaptor.subscribe("topic");
     });
 
     it("tells the client to subscribe to a topic", function() {
-      expect(client.subscribe).to.be.calledWith('topic');
+      expect(client.subscribe).to.be.calledWith("topic");
     });
   });
 
@@ -102,11 +103,11 @@ describe("Cylon.Adaptors.Mqtt", function() {
     beforeEach(function() {
       client = adaptor.client = { publish: spy() };
 
-      adaptor.publish('topic', 'message');
+      adaptor.publish("topic", "message");
     });
 
     it("tells the client to publish a message to a topic", function() {
-      expect(client.publish).to.be.calledWith('topic', 'message');
+      expect(client.publish).to.be.calledWith("topic", "message");
     });
   });
 });
