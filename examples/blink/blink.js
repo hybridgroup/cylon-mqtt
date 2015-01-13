@@ -9,8 +9,8 @@ Cylon.robot({
   },
 
   devices: {
-    toggle: { driver: "mqtt", topic: "toggle", adaptor: "mqtt" },
-    led: { driver: "led", pin: "13", adaptor: "firmata" },
+    toggle: { driver: "mqtt", topic: "toggle", connection: "mqtt" },
+    led: { driver: "led", pin: "13", connection: "firmata" },
   },
 
   work: function(my) {
