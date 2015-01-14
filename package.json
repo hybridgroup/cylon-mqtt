@@ -1,6 +1,6 @@
 {
   "name": "cylon-mqtt",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Cylon module for MQTT",
 
   "main": "lib/cylon-mqtt.js",
@@ -26,11 +26,11 @@
   },
 
   "peerDependencies": {
-    "cylon": ">=0.21.0 < 1"
+    "cylon": ">=0.22.0 < 1"
   },
 
   "dependencies": {
-    "cylon": "~0.21.0",
+    "cylon": "~0.22.0",
     "mqtt": "~0.3.12"
   }
 }
