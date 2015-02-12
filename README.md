@@ -153,6 +153,13 @@ Cylon.robot({
 }).start();
 ```
 
+### Authentication
+
+```
+    mqtt: { adaptor: "mqtt", host: "mqtt://localhost:1883",
+            username: "iamuser", password: "sosecure" },
+```
+
 ## Documentation
 
 We're busy adding documentation to [cylonjs.com](http://cylonjs.com). Please check there as we continue to work on Cylon.js.
