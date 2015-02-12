@@ -1,6 +1,6 @@
 {
   "name": "cylon-mqtt",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Cylon module for MQTT",
 
   "main": "lib/cylon-mqtt.js",

@@ -182,6 +182,8 @@ Thank you!
 
 ## Release History
 
+0.4.0 - Add username and password for secure mqtt brokers
+
 0.3.0 - Compatability with Cylon 0.22.0
 
 0.2.0 - Compatability with Cylon 0.21.0
@@ -190,4 +192,4 @@ Thank you!
 
 ## License
 
-Copyright (c) 2014 The Hybrid Group. Licensed under the Apache 2.0 license.
+Copyright (c) 2014-2015 The Hybrid Group. Licensed under the Apache 2.0 license.
