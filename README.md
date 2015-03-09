@@ -11,7 +11,7 @@ For more information about Cylon.js, check out the repo at https://github.com/hy
 
 Install `cylon-mqtt` through NPM:
 
-    $ npm install cylon-mqtt
+    $ npm install cylon cylon-mqtt
 
 Before using `cylon-mqtt`, you'll need to have a MQTT broker running in order to connect/publish/subscribe to messages.
 
