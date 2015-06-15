@@ -1,9 +1,8 @@
-/* jshint expr:true */
 "use strict";
 
 var Cylon = require("cylon");
 
-var Driver = source("driver");
+var Driver = lib("driver");
 
 describe("Cylon.Drivers.Mqtt", function() {
   var driver;

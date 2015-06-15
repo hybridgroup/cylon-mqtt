@@ -10,7 +10,7 @@ Cylon.robot({
   work: function(my) {
     my.server.subscribe("hello");
 
-    my.server.on("message", function (topic, data) {
+    my.server.on("message", function(topic, data) {
       console.log(topic + ": " + data);
     });
 

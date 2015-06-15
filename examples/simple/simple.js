@@ -12,7 +12,7 @@ Cylon.robot({
   },
 
   work: function(my) {
-    my.hello.on("message", function (data) {
+    my.hello.on("message", function(data) {
       console.log(data);
     });
 

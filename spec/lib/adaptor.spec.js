@@ -1,7 +1,6 @@
-/* jshint expr:true */
 "use strict";
 
-var Adaptor = source("adaptor");
+var Adaptor = lib("adaptor");
 
 var mqtt = require("mqtt");
 

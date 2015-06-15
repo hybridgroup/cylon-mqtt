@@ -1,10 +1,9 @@
-/* jshint expr:true */
 "use strict";
 
-var mqtt = source("cylon-mqtt");
+var mqtt = lib("cylon-mqtt");
 
-var Adaptor = source("adaptor"),
-    Driver = source("driver");
+var Adaptor = lib("adaptor"),
+    Driver = lib("driver");
 
 describe("Cylon.MQTT", function() {
   describe("#adaptors", function() {
