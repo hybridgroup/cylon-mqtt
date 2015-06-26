@@ -1,6 +1,6 @@
 "use strict";
 
-var mqtt = lib("cylon-mqtt");
+var mqtt = lib("../");
 
 var Adaptor = lib("adaptor"),
     Driver = lib("driver");

@@ -3,8 +3,6 @@
   "version": "0.5.0",
   "description": "Cylon module for MQTT",
 
-  "main": "lib/cylon-mqtt.js",
-
   "homepage": "http://cylonjs.com",
   "bugs": "https://github.com/hybridgroup/cylon-mqtt/issues",
 
