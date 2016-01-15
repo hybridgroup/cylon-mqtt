@@ -1,5 +1,7 @@
 ## Release History
 
+0.8.0 - Use mqtt.js 1.6.3, add protocolId and protocolVersion additional connection options
+
 0.7.0 - Use Cylon 1.2.0 & mqtt.js 1.4.0
 
 0.6.0 - Use Cylon 1.1.0

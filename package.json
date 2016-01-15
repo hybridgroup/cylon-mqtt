@@ -1,6 +1,6 @@
 {
   "name": "cylon-mqtt",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Cylon module for MQTT",
 
   "homepage": "http://cylonjs.com",
@@ -37,7 +37,7 @@
   },
 
   "dependencies": {
-    "cylon": "~1.2.0",
-    "mqtt": "~1.4.0"
+    "cylon": "^1.2.0",
+    "mqtt": "^1.6.3"
   }
 }
