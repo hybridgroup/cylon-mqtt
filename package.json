@@ -25,6 +25,7 @@
     "iot",
     "hardware",
     "mqtt",
+    "mqtt.js",
     "m2m"
   ],
 
@@ -38,6 +39,6 @@
 
   "dependencies": {
     "cylon": "^1.2.0",
-    "mqtt": "^1.6.3"
+    "mqtt": "mqttjs/MQTT.js#v2-dev"
   }
 }
