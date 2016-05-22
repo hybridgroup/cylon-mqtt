@@ -43,6 +43,10 @@ describe("Cylon.Adaptors.Mqtt", function() {
       expect(adaptor.client).to.be.eql(client);
     });
 
+    it("resets list of @subscriptions", function() {
+      expect(adaptor.subscriptions).to.be.eql([]);
+    });
+
     it("attaches a handler to the client", function() {
       expect(client.on).to.be.calledWith("message");
     });
@@ -94,6 +98,13 @@ describe("Cylon.Adaptors.Mqtt", function() {
     it("tells the client to subscribe to a topic", function() {
       expect(client.subscribe).to.be.calledWith("topic");
     });
+
+    it("adds a topic to the list of @subscriptions", function() {
+      expect(adaptor.subscriptions).to.have.length(1);
+      expect(adaptor.subscriptions[0]).to.have.property("0");
+      expect(adaptor.subscriptions[0]["0"]).to.equal("topic");
+    });
+
   });
 
   describe("#publish", function() {
